@@ -81,7 +81,9 @@
     // test if a specific row on this board contains a conflict
     // var board = new Board({n:5})
     hasRowConflictAt: function(rowIndex) {
-      var currentRow = this.attributes[rowIndex];
+      var currentRow = this.rows()[rowIndex];
+      // var currentRow = this.rows()[rowIndex];
+
       var countOnes = 0;
 
       for (var i = 0 ; i<currentRow.length; i++) {
@@ -101,7 +103,7 @@
 
       var hasConflict = false;
 
-      for (var key in this.attributes) {
+      for (var key in this.rows()) {
         hasConflict = this.hasRowConflictAt(key);
         if(hasConflict) {
           return true;
@@ -119,8 +121,8 @@
     hasColConflictAt: function(colIndex) {
       var rookCount = 0;
 
-      for (var key in this.attributes) {
-        var eachRow =  this.attributes[key];
+      for (var key in this.rows()) {
+        var eachRow =  this.rows()[key];
         if (eachRow[colIndex]) {
           rookCount++;
         }
@@ -134,19 +136,13 @@
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      if(this.attributes[0] === undefined) {
-        console.log('THE ERROR WAS RIGHT');
-        // debugger;
+      if(this.attributes.n === 0) {
+        console.log("this", this.attributes.n);
+      console.log("this.rows():",this.rows()[0])
+        return false;
       }
-      console.log("attributes:", this.attributes[0])
-      console.log("rows:", this.rows()[0]);
-      // console.log("this.attributes[0]", this.attributes[0])
-      console.log("THIS", this);
-      if(this.attributes[0] !== undefined) {
-        var boardSize = this.attributes[0].length;
-        console.log("THIS")
-      }
-      console.log("boardSize", boardSize);
+
+      var boardSize = this.rows()[0].length;
       var hasConflict = false;
       for (var i = 0 ; i < boardSize; i++) {
         hasConflict = this.hasColConflictAt(i);
@@ -175,27 +171,30 @@
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
       //determine if there is more than one 1's in the table;
       // console.log("**********", majorDiagonalColumnIndexAtFirstRow);
+      if(this.attributes.n === 0) {
+        // console.log("this", this.attributes.n);
+      // console.log("this.rows():",this.rows()[0])
+        return false;
+      }
+      
       var pieceCount = 0;
       var majorIndex;
-      if(!this.attributes[0]) {
-        var boardSize = this.attributes[0].length;
+      var boardSize = this.rows()[0].length;
 
-      }
+      for (var i in this.rows()) {
+      // console.log("this.rows()[0]", this.rows()[i]);
 
-      for (var i in this.attributes) {
-      // console.log("this.attributes[0]", this.attributes[i]);
-
-        // console.log("each row", this.attributes[i]);
+        // console.log("each row", this.rows()[i]);
         // console.log("key", key);
         // console.log("boardSize", boardSize);
         for (var j = 0; j < boardSize; j++) {
-          // console.log("each element", this.attributes[i][j]);
+          // console.log("each element", this.rows()[i][j]);
           // console.log("majorIndex", majorIndex);
 
           // console.log("SOMETHIGN", something);
           // console.log("majorIndex", majorIndex);
 
-          if(this.attributes[i][j]) {
+          if(this.rows()[i][j]) {
           majorIndex = this._getFirstRowColumnIndexForMajorDiagonalOn(i, j);
 
             // console.log("THERE IS ELEMENT HERE");
@@ -205,10 +204,10 @@
             }
           }
           // if(majorIndex === majorDiagonalColumnIndexAtFirstRow) {
-          //   // console.log("this.attributes[i]:",this.attributes[i]);
-          //   // console.log("this.attributes[i][j]:",this.attributes[i][j]);
-          //   console.log("is there a rook", this.attributes[i][j])
-          //   if(this.attributes[i][j]) {
+          //   // console.log("this.rows()[i]:",this.rows()[i]);
+          //   // console.log("this.rows()[i][j]:",this.rows()[i][j]);
+          //   console.log("is there a rook", this.rows()[i][j])
+          //   if(this.rows()[i][j]) {
           //     pieceCount++;
           //   }
 
@@ -268,13 +267,13 @@
       var pieceCount = 0;
       var minorIndex;
       // console.log("***********input*****", minorDiagonalColumnIndexAtFirstRow)
-      for (var i in this.attributes) {
-        var currRow = this.attributes[i];
-        var size = this.attributes[0].length;
+      for (var i in this.rows()) {
+        var currRow = this.rows()[i];
+        var size = this.rows()[0].length;
         // console.log("SIZE", size);
         // console.log("current Row:", currRow);
         for (var j = 0; j < size; j++) {
-          if(this.attributes[i][j]) { 
+          if(this.rows()[i][j]) { 
             // console.log("i, j", i)
             var numI = parseInt(i);
             minorIndex = this._getFirstRowColumnIndexForMinorDiagonalOn(numI,j)
