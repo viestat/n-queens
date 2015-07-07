@@ -134,7 +134,19 @@
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      var boardSize = this.attributes[0].length;
+      if(this.attributes[0] === undefined) {
+        console.log('THE ERROR WAS RIGHT');
+        // debugger;
+      }
+      console.log("attributes:", this.attributes[0])
+      console.log("rows:", this.rows()[0]);
+      // console.log("this.attributes[0]", this.attributes[0])
+      console.log("THIS", this);
+      if(this.attributes[0] !== undefined) {
+        var boardSize = this.attributes[0].length;
+        console.log("THIS")
+      }
+      console.log("boardSize", boardSize);
       var hasConflict = false;
       for (var i = 0 ; i < boardSize; i++) {
         hasConflict = this.hasColConflictAt(i);
@@ -165,7 +177,10 @@
       // console.log("**********", majorDiagonalColumnIndexAtFirstRow);
       var pieceCount = 0;
       var majorIndex;
-      var boardSize = this.attributes[0].length;
+      if(!this.attributes[0]) {
+        var boardSize = this.attributes[0].length;
+
+      }
 
       for (var i in this.attributes) {
       // console.log("this.attributes[0]", this.attributes[i]);

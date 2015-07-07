@@ -38,25 +38,20 @@ window.findNRooksSolution = function(n) {
   var array = [];
   var board = new Board({n:n});
   // console.log(board);
-  console.log("*(********")
-    console.log("board", board);
-    console.log("board.attributes", board.attributes);
   for (var i = 0; i < n; i++) {
-    var currentRow = board.rows[i];
+    // var currentRow = board.rows[i];
     // var subArray = [];
     for (var j =0; j<n; j++) {
-      console.log("HELLO")
       if(!board.hasAnyColConflicts() && !board.hasAnyRowConflicts()) {
-        console.log("EVALUATED")
         board.togglePiece(i,j);
         // countRooks++;
       } 
     }
     var newRow = board.attributes[i];
-    console.log("newRow", newRow);
+    // console.log("newRow", newRow);
 
     array.push(newRow);
-    console.log("array", array);
+    // console.log("array", array);
   }
 
 
@@ -80,29 +75,55 @@ window.countNRooksSolutions = function(n) {
 
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n queens placed such that none of them can attack each other
 window.findNQueensSolution = function(n) {
-  var board = new Board({n:n});
+  // console.log()
+  // var board = new Board({n:n});
+  // var array = [];
+  // console.log("n", n)
+  // for(var i = 0; i < n; i++){
+  //   var currRow = board.rows[i];
+  //   for(var j = 0; j < n; j++){      
+  //     console.log("asdkfja;sdlkfjlasdkjf;laskdjf")
+  //   if(!board.hasAnyColConflicts() && !board.hasAnyRowConflicts() 
+  //     // && !board.hasAnyMajorDiagonalConflicts() && board.hasAnyMinorDiagonalConflicts()
+  //     ) {
+  //     // console.log("OMSETHING");
+  //       board.togglePiece(i, j);
+  //     }
+  //   }
+
+  //   array.push(board.attributes[i]);
+  // } 
+
+
+  // var solution = array; //fixme
+
+  // console.log('Single solution for ' + n + ' queens:', JSON.stringify(solution));
+  // return solution;
+
+
   var array = [];
-  for(var i = 0; i < n; i++){
-    var currRow = board.rows[i];
-    for(var j = 0; j < n; j++){
-
-      
-    if(!board.hasAnyColConflicts() && !board.hasAnyRowConflicts() {
-      console.log("wlkejra;wlkjrwa;lkejrawlekrjla;wkejrlwkej");
+  var board = new Board({n:n});
+  // console.log(board);
+  for (var i = 0; i < n; i++) {
+    // var currentRow = board.rows[i];
+    // var subArray = [];
+    for (var j =0; j<n; j++) {
+      if(!board.hasAnyColConflicts() && !board.hasAnyRowConflicts()) {
+        board.togglePiece(i,j);
+        // countRooks++;
+      } 
     }
-      if(!board.hasAnyMajorDiagonalConflicts() && !board.hasAnyMinorDiagonalConflicts()) {
-      console.log("nothing");
-        board.togglePiece(i, j);
-      }
-    // }
-    array.push(board.attributes[i]);
-  } 
+    var newRow = board.attributes[i];
+    // console.log("newRow", newRow);
 
+    array.push(newRow);
+    // console.log("array", array);
+  }
 
   var solution = array; //fixme
 
-  console.log('Single solution for ' + n + ' queens:', JSON.stringify(solution));
-  return solution;
+  console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
+  return solution;  
 };
 
 
